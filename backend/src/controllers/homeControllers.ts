@@ -1,9 +1,8 @@
-import type { Request, Response, NextFunction } from "express";
-
-export const getHomeController = (
+import type { Request, Response, NextFunction } from 'express';
+export const getHomeController = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
-  res.status(200).json({ message: "Welcome to the Home Route!" });
+  res.status(200).json({ message: 'Welcome to the Home Route!', data: [] });
 };
