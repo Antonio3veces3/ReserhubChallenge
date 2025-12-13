@@ -1,5 +1,23 @@
 import type { Request, Response } from 'express';
 import { UserModel, type IUser } from '../models/user.model.ts';
+import jwt from 'jsonwebtoken';
+import config from '../config/config.ts';
+
+const generateAuthToken = (user: IUser) => {
+  return jwt.sign({ username: user.username }, config.JWT_SECRET, {
+    expiresIn: '1h',
+  });
+};
+
+export const testingJwt = async (req: Request, res: Response) => {
+  const userTest = new UserModel({
+    username: 'testuser',
+    password: 'testpassword',
+  });
+
+  const token = generateAuthToken(userTest);
+  res.status(200).json({ token });
+};
 
 export const signUpController = async (req: Request, res: Response) => {
   try {
@@ -15,8 +33,10 @@ export const signUpController = async (req: Request, res: Response) => {
     const newUser = new UserModel({ username, password });
     await newUser.save();
 
+    const newJwt = generateAuthToken(newUser);
     return res.status(201).json({
       message: 'User registered successfully',
+      token: newJwt,
       user: { id: newUser._id, username: newUser.username },
     });
   } catch (error) {
@@ -41,8 +61,10 @@ export const signInController = async (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Incorrect password' });
     }
 
+    const newJwt = generateAuthToken(user);
     return res.status(200).json({
       message: 'Login successful',
+      token: newJwt,
       user: { id: user._id, username: user.username },
     });
   } catch (error) {

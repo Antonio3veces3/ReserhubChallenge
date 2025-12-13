@@ -3,9 +3,9 @@ import app from './app.ts';
 import config from './config/config.ts';
 import { connectDB } from './db/connection.ts';
 
-app.listen(config.port, async () => {
+app.listen(config.PORT, async () => {
   await connectDB();
   console.log(
-    `Server is running on port ${config.port} in ${config.nodeEnv} mode.`,
+    `Server is running on PORT ${config.PORT} in ${config.ENV} mode.`,
   );
 });
