@@ -1,8 +1,10 @@
 import type { Request, Response, NextFunction } from 'express';
+import { UserModel } from '../models/user.model.ts';
 export const getHomeController = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  res.status(200).json({ message: 'Welcome to the Home Route!', data: [] });
+  const users = await UserModel.find();
+  res.status(200).json({ message: 'Welcome to the Home Route!', data: users });
 };
