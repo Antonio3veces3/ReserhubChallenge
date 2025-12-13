@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { UserModel } from '../models/user.model.ts';
+
 export const getHomeController = async (
   req: Request,
   res: Response,

@@ -30,6 +30,7 @@
   "dependencies": {
     "@types/bcryptjs": "^3.0.0",
     "@types/jsonwebtoken": "^9.0.10",
+    "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.0.1"
