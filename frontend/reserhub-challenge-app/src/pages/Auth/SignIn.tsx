@@ -10,13 +10,13 @@ import { config } from '../../config/config';
 export function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+
 
     const navigate = useNavigate();
 
     const handleLoginSubmit = async (event: any) => {
         event.preventDefault();
-        setError('');
+
 
         try {
             const response = await axios.post(`${config.API_BASE_URL}/auth/signin`, {
@@ -38,7 +38,6 @@ export function SignIn() {
 
         } catch (err: any) {
             console.error('Login error:', err.response?.data || err.message);
-            setError('Invalid credentials or an error occurred.');
         }
     };
 

@@ -1,10 +1,45 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { COLORS } from '../../styles/colors';
 import logo from '../../assets/logo.svg';
 import { styles } from './common.styles';
-import { Link } from 'react-router-dom';
 import { CustomLabel } from './components/CustomLabel';
+import axios from 'axios';
+import { config } from '../../config/config';
 
 export function SignUp() {
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleSingUpSubmit = async (event: any) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post(`${config.API_BASE_URL}/auth/signup`, {
+                username,
+                email,
+                password,
+            });
+
+            if (response.status === 201) {
+                console.log(response.data);
+                localStorage.setItem('jwt', response.data.token);
+                localStorage.setItem('username', response.data.user.username);
+                localStorage.setItem('email', response.data.user.email);
+
+                navigate('/home');
+            }
+
+
+
+        } catch (err: any) {
+            console.error('Login error:', err.response?.data || err.message);
+        }
+    };
+
     return (
         <div className={styles.containerMain} style={{ background: COLORS().BACKGROUND }}>
             <div className={styles.containerBody}>
@@ -18,7 +53,7 @@ export function SignUp() {
                     Create your account
                 </h2>
 
-                <form onSubmit={() => { }} className="space-y-4">
+                <form onSubmit={handleSingUpSubmit} className="space-y-4">
                     <CustomLabel text="Full name:" id="fullname" />
                     <input
                         id='fullname'
@@ -26,6 +61,8 @@ export function SignUp() {
                         placeholder="Full Name"
                         required
                         className={styles.input}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                     <CustomLabel text="Email:" id="email" />
                     <input
@@ -34,14 +71,18 @@ export function SignUp() {
                         placeholder="example@example.com"
                         required
                         className={styles.input}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <CustomLabel text="Password:" id="password" />
                     <input
                         id='password'
                         type="password"
-                        placeholder="password"
+                        placeholder="Password"
                         required
                         className={styles.input}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
 
                     />
                     <button
