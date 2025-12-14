@@ -4,12 +4,16 @@ import {
   fetchCitiesByNamePrefix,
   fetchRandomCities,
 } from '../services/geoCitiesService.ts';
+import type { OrderBy } from '../services/types/common.ts';
 
 export const getCities = async (req: Request, res: Response) => {
-  const { prefix, country_code, limit } = req.query;
+  const { prefix, country_code, limit, orderBy } = req.query;
 
   if (!prefix && !country_code) {
-    const randomCities = await fetchRandomCities(limit as number | undefined);
+    const randomCities = await fetchRandomCities(
+      limit as number | undefined,
+      orderBy as OrderBy | undefined,
+    );
     res.json(randomCities);
     return;
   }

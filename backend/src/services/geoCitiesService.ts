@@ -1,5 +1,6 @@
 import { EXTERNAL_APIS } from '../config/external-apis.ts';
 import { createHttpClient } from '../utils/httpClient.ts';
+import type { OrderBy } from './types/common.ts';
 
 const geoDbCitiesApiClient = createHttpClient(
   EXTERNAL_APIS.GEO_DB_CITIES_API.BASE_URL,
@@ -74,14 +75,16 @@ export const fetchCitiesByNamePrefix = async (
 
 export const fetchRandomCities = async (
   limit: number = 10,
+  orderBy: OrderBy = 'DESC',
 ): Promise<City[]> => {
   const endpoint = `/v1/geo/places`;
-
+  const sortBy = orderBy === 'ASC' ? 'population' : '-population';
   try {
     const response = await geoDbCitiesApiClient.get(endpoint, {
       params: {
         ...commonParams,
         limit: limit,
+        sort: sortBy,
       },
       headers: {
         'Content-Type': 'application/json',
