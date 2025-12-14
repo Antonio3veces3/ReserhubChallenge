@@ -3,7 +3,6 @@ import {
   signInController,
   signUpController,
 } from '../controllers/authController.ts';
-import { authenticateJWT } from '../middlewares/auth.middleware.ts';
 
 const router = Router();
 
