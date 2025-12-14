@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 
 export interface IUser extends Document {
   username: string;
+  email: string;
   password: string;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
@@ -12,6 +13,12 @@ const UserSchema = new Schema<IUser>(
     username: {
       type: String,
       required: [true, 'Username is required'],
+      trim: true,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      required: [true, 'Email is required'],
       unique: true,
       trim: true,
     },
