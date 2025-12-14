@@ -3,6 +3,7 @@ import { useQueries } from "@tanstack/react-query"
 import { fetchCurrentWeather } from "../../weather/api/fetchCurrentWeather"
 import { useGetPlaceByPrefix } from "../hooks/useGetPlaceByPrefix"
 import { CityWeatherCard } from "../../weather/components/CityWeatherCard"
+import type { CityWeatherDetails } from "../types/commonTypes"
 
 export function SearchCity() {
     const [input, setInput] = useState<string>("")
@@ -19,15 +20,15 @@ export function SearchCity() {
     })
 
     const weatherIsLoading = weatherQueries.some((query) => query.isLoading)
-
-    const citiesWithWeather = (placeData?.data ?? []).map((place: any, index: any) => ({
+    const citiesWithWeather: CityWeatherDetails[] = (placeData?.data ?? []).map((place: any, index: any) => ({
         name: place.name,
         country: place.country,
         weather: weatherQueries[index].data,
     }))
 
-    if (!placeIsLoading && !weatherIsLoading) {
-        console.log('citiesWithWeather: ', citiesWithWeather);
+    if (!weatherIsLoading) {
+        console.log(citiesWithWeather);
+
     }
 
     const handleSearch = (e?: React.FormEvent) => {
@@ -55,16 +56,22 @@ export function SearchCity() {
             </form>
 
             <div className="w-full max-w-full mx-auto p-4">
-                <ul className="flex flex-wrap gap-4 list-none">
-                    {citiesWithWeather.map((city: any, idx: number) => (
-                        <li key={city.name + idx} className="p-3">
-                            <CityWeatherCard weather={{
-                                city: city.name,
-                                temperature: 30.2
-                            }} />
-                        </li>
-                    ))}
-                </ul>
+                {
+                    weatherIsLoading ? <p>Loading...</p> : (
+                        <ul className="flex flex-wrap gap-4 list-none">
+                            {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
+                                <li key={`${city.name}-${index}`} className="p-3">
+                                    <CityWeatherCard data={{
+                                        country: city.country,
+                                        name: city.name,
+                                        weather: city.weather
+                                    }} />
+                                </li>
+                            ))}
+                        </ul>
+                    )
+                }
+
             </div>
         </div>
     )

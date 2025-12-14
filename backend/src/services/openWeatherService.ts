@@ -31,6 +31,7 @@ export const fetchCurrentWeather = async (
       params: {
         lat,
         lon,
+        units: 'metric',
         appid: config.WEATHER_KEY,
       },
       headers: {
@@ -63,6 +64,7 @@ export const fetchForecastWeather = async (
       params: {
         lat,
         lon,
+        units: 'metric',
         appid: config.WEATHER_KEY,
       },
       headers: {
