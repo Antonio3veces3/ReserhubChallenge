@@ -69,7 +69,7 @@ const RightSectionNavbar = ({ username, navigate }: RightSectionNavbarProps) => 
 
     const handleLogout = () => {
         localStorage.removeItem('username')
-        localStorage.removeItem('token')
+        localStorage.removeItem('jwt')
         localStorage.removeItem('email')
         setIsDropdownOpen(false)
         navigate('/auth/sign-in')

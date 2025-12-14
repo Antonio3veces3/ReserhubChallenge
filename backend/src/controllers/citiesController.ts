@@ -7,12 +7,12 @@ import {
 import type { OrderBy } from '../services/types/common.ts';
 
 export const getCities = async (req: Request, res: Response) => {
-  const { prefix, country_code, limit, orderBy } = req.query;
+  const { prefix, country_code, limit, sortBy } = req.query;
 
   if (!prefix && !country_code) {
     const randomCities = await fetchRandomCities(
       limit as number | undefined,
-      orderBy as OrderBy | undefined,
+      sortBy as OrderBy | undefined,
     );
     res.json(randomCities);
     return;

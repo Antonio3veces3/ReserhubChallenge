@@ -6,6 +6,7 @@ import { Home } from './pages/Home'
 import { Places } from './pages/Places'
 import { City } from './pages/City'
 import { Navbar } from './components/Navbar'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function AppLayout() {
   const location = useLocation()
@@ -31,10 +32,15 @@ function AppLayout() {
   )
 }
 
+const queryClient = new QueryClient()
+
 function App() {
   return (
     <BrowserRouter>
-      <AppLayout />
+      <QueryClientProvider client={queryClient}>
+
+        <AppLayout />
+      </QueryClientProvider>
     </BrowserRouter>
   )
 }
