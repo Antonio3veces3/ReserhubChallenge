@@ -1,5 +1,6 @@
 import { EXTERNAL_APIS } from '../config/external-apis.ts';
 import { createHttpClient } from '../utils/httpClient.ts';
+import { cityCache } from './nodeCacheInstance.ts';
 import type { OrderBy } from './types/common.ts';
 
 const geoDbCitiesApiClient = createHttpClient(
@@ -29,6 +30,13 @@ export const fetchCitiesByCountryCode = async (
   limit: number = 10,
 ): Promise<City[]> => {
   try {
+    const queryKey = `cityByCountryCode:${countryCode}:${limit}`;
+
+    const cachedData = await cityCache.get<City[]>(queryKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
     const endpoint = `/v1/geo/countries/${countryCode}/places?`;
     const response = await geoDbCitiesApiClient.get(endpoint, {
       params: {
@@ -41,6 +49,7 @@ export const fetchCitiesByCountryCode = async (
       },
     });
 
+    cityCache.set(queryKey, response.data);
     return response.data;
   } catch (error) {
     console.log('Error fetching cities by country code');
@@ -54,6 +63,13 @@ export const fetchCitiesByNamePrefix = async (
 ): Promise<City[]> => {
   const endpoint = `/v1/geo/places`;
   try {
+    const queryKey = `cityByNamePrefix:${name}:${limit}`;
+
+    const cachedData = await cityCache.get<City[]>(queryKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
     const response = await geoDbCitiesApiClient.get(endpoint, {
       params: {
         limit: limit,
@@ -66,6 +82,7 @@ export const fetchCitiesByNamePrefix = async (
       },
     });
 
+    cityCache.set(queryKey, response.data);
     return response.data;
   } catch (error) {
     console.log('Error fetching cities by name prefix');
@@ -77,6 +94,13 @@ export const fetchRandomCities = async (
   limit: number = 10,
   orderBy: OrderBy = 'DESC',
 ): Promise<City[]> => {
+  const queryKey = `randomCities:${limit}:${orderBy}`;
+
+  const cachedData = await cityCache.get<City[]>(queryKey);
+  if (cachedData) {
+    return cachedData;
+  }
+
   const endpoint = `/v1/geo/places`;
   const sortBy = orderBy === 'ASC' ? 'population' : '-population';
   try {
@@ -91,6 +115,7 @@ export const fetchRandomCities = async (
       },
     });
 
+    cityCache.set(queryKey, response.data);
     return response.data;
   } catch (error) {
     console.log('Error fetching random cities');

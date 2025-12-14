@@ -1,6 +1,8 @@
 import config from '../config/config.ts';
 import { EXTERNAL_APIS } from '../config/external-apis.ts';
 import { createHttpClient } from '../utils/httpClient.ts';
+import { weatherCache } from './nodeCacheInstance.ts';
+
 import type {
   CurrentWeather,
   ForecastWeather,
@@ -15,6 +17,15 @@ export const fetchCurrentWeather = async (
   lon: number,
 ): Promise<CurrentWeather | Object> => {
   try {
+    const queryKey = `currentWeather:${lat}:${lon}`;
+
+    const cachedData = await weatherCache.get<CurrentWeather | Object>(
+      queryKey,
+    );
+    if (cachedData) {
+      return cachedData;
+    }
+
     const endpoint = `/data/2.5/weather`;
     const response = await openWeatherApiClient.get<CurrentWeather>(endpoint, {
       params: {
@@ -27,6 +38,7 @@ export const fetchCurrentWeather = async (
       },
     });
 
+    weatherCache.set(queryKey, response.data);
     return response.data;
   } catch (error) {
     console.log('Error fetching current weather');
@@ -39,6 +51,13 @@ export const fetchForecastWeather = async (
   lon: number,
 ): Promise<ForecastWeather | Object> => {
   try {
+    const queryKey = `forecastWeather:${lat}:${lon}`;
+
+    const cachedData = await weatherCache.get(queryKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
     const endpoint = `/data/2.5/forecast`;
     const response = await openWeatherApiClient.get<ForecastWeather>(endpoint, {
       params: {
@@ -51,6 +70,7 @@ export const fetchForecastWeather = async (
       },
     });
 
+    weatherCache.set(queryKey, response.data);
     return response.data;
   } catch (error) {
     console.log('Error fetching forecast weather');
