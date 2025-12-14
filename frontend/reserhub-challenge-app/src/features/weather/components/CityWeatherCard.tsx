@@ -4,14 +4,14 @@ import { FaCloud, FaCloudRain, FaEye, FaWind } from "react-icons/fa";
 
 interface WeatherData {
   city: string;
-  date: string;
   temperature: number;
-  description: string;
-  windSpeed: number;
-  feelsLike: number;
-  humidity: number;
-  visibility: number;
-  pressure: number;
+  date?: string;
+  description?: string;
+  windSpeed?: number;
+  feelsLike?: number;
+  humidity?: number;
+  visibility?: number;
+  pressure?: number;
 }
 
 interface CityWeatherCardProps {

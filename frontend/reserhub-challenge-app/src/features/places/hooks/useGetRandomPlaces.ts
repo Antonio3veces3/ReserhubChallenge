@@ -6,6 +6,6 @@ export const useGetRandomPlaces = (orderBy: Order) => {
   return useQuery({
     queryKey: ["places", "random", orderBy],
     queryFn: () => fetchPlaces(orderBy),
-    // staleTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: 10 * 60 * 1000, // 10 minutes
   });
 };

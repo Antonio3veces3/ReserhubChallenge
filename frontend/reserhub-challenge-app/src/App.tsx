@@ -38,7 +38,6 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-
         <AppLayout />
       </QueryClientProvider>
     </BrowserRouter>
