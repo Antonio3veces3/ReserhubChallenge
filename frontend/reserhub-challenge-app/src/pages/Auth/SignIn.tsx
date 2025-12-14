@@ -1,10 +1,47 @@
+import { useState } from 'react';
 import { COLORS } from '../../styles/colors';
 import logo from '../../assets/logo.svg';
 import { styles } from './common.styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CustomLabel } from './components/CustomLabel';
+import axios from 'axios';
+import { config } from '../../config/config';
 
 export function SignIn() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleLoginSubmit = async (event: any) => {
+        event.preventDefault();
+        setError('');
+
+        try {
+            const response = await axios.post(`${config.API_BASE_URL}/auth/signin`, {
+                email,
+                password,
+            });
+
+            if (response.status === 200) {
+                const token = response.data.token;
+                const { username, email } = response.data.user;
+                localStorage.setItem('jwt', token);
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+
+                navigate('/home');
+            }
+
+
+
+        } catch (err: any) {
+            console.error('Login error:', err.response?.data || err.message);
+            setError('Invalid credentials or an error occurred.');
+        }
+    };
+
     return (
         <div className={styles.containerMain} style={{ background: COLORS().BACKGROUND }}>
             <div className={styles.containerBody}>
@@ -18,7 +55,7 @@ export function SignIn() {
                     Welcome!
                 </h2>
 
-                <form onSubmit={() => { }} className="space-y-4">
+                <form onSubmit={handleLoginSubmit} className="space-y-4">
                     <CustomLabel text="Email:" id="email" />
                     <input
                         id='email'
@@ -26,6 +63,9 @@ export function SignIn() {
                         placeholder="example@example.com"
                         required
                         className={styles.input}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+
                     />
                     <CustomLabel text="Password:" id="password" />
                     <input
@@ -34,6 +74,8 @@ export function SignIn() {
                         placeholder="password"
                         required
                         className={styles.input}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
 
                     />
                     <button
