@@ -2,6 +2,7 @@ import { COLORS } from '../../styles/colors';
 import logo from '../../assets/logo.svg';
 import { styles } from './common.styles';
 import { Link } from 'react-router-dom';
+import { CustomLabel } from './components/CustomLabel';
 
 export function SignUp() {
     return (
@@ -18,19 +19,25 @@ export function SignUp() {
                 </h2>
 
                 <form onSubmit={() => { }} className="space-y-4">
+                    <CustomLabel text="Full name:" id="fullname" />
                     <input
+                        id='fullname'
                         type="text"
                         placeholder="Full Name"
                         required
                         className={styles.input}
                     />
+                    <CustomLabel text="Email:" id="email" />
                     <input
+                        id='email'
                         type="email"
                         placeholder="example@example.com"
                         required
                         className={styles.input}
                     />
+                    <CustomLabel text="Password:" id="password" />
                     <input
+                        id='password'
                         type="password"
                         placeholder="password"
                         required
