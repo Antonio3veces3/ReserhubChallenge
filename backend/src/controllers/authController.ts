@@ -13,16 +13,6 @@ const generateAuthToken = (user: IUser) => {
   );
 };
 
-export const testingJwt = async (req: Request, res: Response) => {
-  const userTest = new UserModel({
-    username: 'testuser',
-    password: 'testpassword',
-  });
-
-  const token = generateAuthToken(userTest);
-  res.status(200).json({ token });
-};
-
 export const signUpController = async (req: Request, res: Response) => {
   try {
     const { username, email, password } = req.body;
