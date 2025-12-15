@@ -44,7 +44,7 @@ export function SearchCity() {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Type city prefix"
+                    placeholder="Type the city name"
                     className="border rounded p-2 w-xl"
                 />
                 <button

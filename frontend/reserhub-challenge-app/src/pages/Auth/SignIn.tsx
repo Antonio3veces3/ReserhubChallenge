@@ -10,6 +10,7 @@ import { config } from '../../config/config';
 export function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isError, setIsError] = useState(false)
 
 
     const navigate = useNavigate();
@@ -31,6 +32,7 @@ export function SignIn() {
                 localStorage.setItem('username', username);
                 localStorage.setItem('email', email);
 
+                setIsError(false)
                 navigate('/home');
             }
 
@@ -38,6 +40,7 @@ export function SignIn() {
 
         } catch (err: any) {
             console.error('Login error:', err.response?.data || err.message);
+            setIsError(true)
         }
     };
 
@@ -77,6 +80,10 @@ export function SignIn() {
                         onChange={(e) => setPassword(e.target.value)}
 
                     />
+
+                    {isError && (
+                        <p className='font-sm  text-red-800'>Invalid user, please try again.</p>
+                    )}
                     <button
                         type="submit"
                         className={styles.button}

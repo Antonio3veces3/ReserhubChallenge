@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { FaAngleDown, FaAngleUp, FaArrowRight } from 'react-icons/fa'
+import { FaAngleDown, FaAngleUp, FaArrowRight, FaBus } from 'react-icons/fa'
 import { Link, useNavigate, type NavigateFunction } from 'react-router-dom'
 
 
@@ -14,7 +14,7 @@ export function Navbar() {
     }, [])
 
     return (
-        <nav className="w-full bg-linear-to-r from-blue-600 to-blue-800 shadow-lg fixed top-0 left-0 right-0 z-50">
+        <nav className="w-full bg-linear-to-r bg-gray-50 shadow-lg fixed top-0 left-0 right-0 z-50">
             <div className="w-full px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <LogoNavbar />
@@ -29,8 +29,8 @@ export function Navbar() {
 const LogoNavbar = () => {
     return (
         <div className="shrink-0 flex items-center gap-2">
-            <div className="text-white text-3xl font-bold">🏠</div>
-            <span className="text-white text-3xl font-bold">ReserHub</span>
+            <div className="text-3xl font-bold"><FaBus /></div>
+            <span className="text-gray-800 text-3xl font-bold">ReserHub</span>
         </div>
     )
 }
@@ -40,11 +40,11 @@ const TabsNavbar = () => {
         <div className="hidden md:flex items-center space-x-8">
             <Link
                 to="/home"
-                className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className="text-md font-semibold"
             >
                 Home
             </Link>
-        </div>
+        </div >
     )
 }
 
