@@ -4,6 +4,7 @@ import type { CityWeatherDetails } from "../../places/types/commonTypes";
 import { FaTemperatureFull } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 import { trunkTemperature } from "../../../utils/weatherUtils";
+import { convertDatestampToHumanDate } from "../../../utils/dateConverter";
 
 interface CityWeatherCardProps {
   data: CityWeatherDetails;
@@ -15,6 +16,8 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
   const lat = weather.coord.lat
   const lon = weather.coord.lon
 
+
+  const date = convertDatestampToHumanDate(weather.dt)
   return (
     <button
       type="button"
@@ -22,7 +25,8 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
       className="bg-linear-to-br from-blue-400 to-blue-400 rounded-xl shadow-lg p-6 max-w-sm text-white"
     >
       <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
-      <p className="text-center text-blue-100 text-sm mb-1">{weather.dt}</p>
+      <p className="text-center text-white-100 font-semibold text-md mb-1">{date.fullDate}</p>
+      <p className="text-center text-white-100 font-medium text-sm mb-1">{date.time}</p>
 
       <div className="text-center mb-2 rounded-lg py-4">
         <div className="text-6xl font-bold mb-2">{trunkTemperature(weather.main.feels_like)} °C</div>

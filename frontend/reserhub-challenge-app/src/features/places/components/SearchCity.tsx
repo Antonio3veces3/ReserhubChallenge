@@ -4,6 +4,7 @@ import { fetchCurrentWeather } from "../../weather/api/fetchCurrentWeather"
 import { useGetPlaceByPrefix } from "../hooks/useGetPlaceByPrefix"
 import { CityWeatherCard } from "../../weather/components/CityWeatherCard"
 import type { CityWeatherDetails } from "../types/commonTypes"
+import { LoadingIndicator } from "../../../components/LoadingIndicator"
 
 export function SearchCity() {
     const [input, setInput] = useState<string>("")
@@ -56,21 +57,19 @@ export function SearchCity() {
             </form>
 
             <div className="w-full max-w-full mx-auto p-4">
-                {
-                    weatherIsLoading ? <p>Loading...</p> : (
-                        <ul className="flex flex-wrap gap-4 list-none">
-                            {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
-                                <li key={`${city.name}-${index}`} className="p-3">
-                                    <CityWeatherCard data={{
-                                        country: city.country,
-                                        name: city.name,
-                                        weather: city.weather
-                                    }} />
-                                </li>
-                            ))}
-                        </ul>
-                    )
-                }
+                {weatherIsLoading ? <LoadingIndicator /> : (
+                    <ul className="flex flex-wrap gap-4 list-none justify-center">
+                        {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
+                            <li key={`${city.name}-${index}`} className="p-3">
+                                <CityWeatherCard data={{
+                                    country: city.country,
+                                    name: city.name,
+                                    weather: city.weather
+                                }} />
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
             </div>
         </div>
