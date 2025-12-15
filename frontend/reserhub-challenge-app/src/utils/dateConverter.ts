@@ -1,4 +1,7 @@
-export const convertDatestampToHumanDate = (dt: number) => {
+export const convertDatestampToHumanDate = (
+  dt: number,
+  short: boolean = false
+) => {
   const date = new Date(dt * 1000);
 
   const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(
@@ -17,7 +20,9 @@ export const convertDatestampToHumanDate = (dt: number) => {
   };
   const time = new Intl.DateTimeFormat("en-US", timeOptions).format(date);
 
-  const fullDate = `${weekday} ${day}, ${month} ${year}`;
+  const fullDate = short
+    ? `${weekday} ${day}, ${month}`
+    : `${weekday} ${day}, ${month} ${year}`;
   const timeFormatted = `${time}`;
   return {
     fullDate,

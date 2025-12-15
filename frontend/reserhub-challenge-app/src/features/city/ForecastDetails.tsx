@@ -24,37 +24,45 @@ export const ForecastDetails = ({ isLoading, isError, forecastList }: ForecastWe
     if (!isLoading && forecastList) {
         body = (
             forecastList?.map((forecast) => (
-                <div key={forecast.dt_txt} className="flex items-center justify-between bg-gray-50 rounded-md p-4 border border-gray-200 min-h-24">
-                    <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
-                            <FaCloud />
+                <div key={forecast.dt_txt} className="flex items-center justify-between bg-gray-50 rounded-md pl-4 pt-4 pb-4 border border-gray-200 min-h-24">
+                    <div className="flex flex-row w-3/7 justify-between">
+                        {/* date */}
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                                <FaCloud />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <p className="text-md font-medium text-gray-700">{convertDatestampToHumanDate(forecast.dt, true).fullDate} </p>
+                                <p className="text-sm font-medium text-gray-700">{convertDatestampToHumanDate(forecast.dt, true).time} </p>
+                            </div>
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <p className="text-md font-medium text-gray-700">{convertDatestampToHumanDate(forecast.dt).fullDate} </p>
-                            <p className="text-sm font-medium text-gray-700">{convertDatestampToHumanDate(forecast.dt).time} </p>
+
+                        {/* temperature */}
+                        <div className="flex flex-col items-center">
+                            <p className="text-2xl font-semibold text-blue-900">
+                                {trunkTemperature(forecast.main.temp)} °c
+                            </p>
+                            <p className="text-sm font-medium text-blue-900">
+                                {forecast.weather[0].description}
+                            </p>
                         </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <p className="text-2xl font-semibold text-blue-900">
-                            {trunkTemperature(forecast.main.temp)} °c
-                        </p>
-                        <p className="text-sm font-medium text-blue-900">
-                            {forecast.weather[0].description}
-                        </p>
-                    </div>
-                    <div className="border border-blue-300 flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md">
-                        <FaWater className="text-sm text-blue-600" />
-                        <p className="text-sm font-semibold text-blue-600">{forecast.main.humidity} %</p>
-                    </div>
-                    <div className="border border-orange-300 flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md">
-                        <FaEye className="text-sm text-orange-600" />
-                        <p className="text-sm font-semibold text-orange-600">{forecast.visibility} km</p>
-                    </div>
-                    <div className="border border-sky-300 flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md">
-                        <FaWind className="text-sm text-sky-600" />
-                        <p className="text-sm font-semibold text-sky-600">{forecast.wind.speed} km/h</p>
                     </div>
 
+                    <div className="flex flex-row w-1/2 justify-between pr-2 ">
+                        {/* details */}
+                        <div className="border border-blue-300 flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md">
+                            <FaWater className="text-sm text-blue-600" />
+                            <p className="text-sm font-semibold text-blue-600">{forecast.main.humidity} %</p>
+                        </div>
+                        <div className="border border-orange-300 flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md">
+                            <FaEye className="text-sm text-orange-600" />
+                            <p className="text-sm font-semibold text-orange-600">{forecast.visibility} km</p>
+                        </div>
+                        <div className="border border-sky-300 flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-md">
+                            <FaWind className="text-sm text-sky-600" />
+                            <p className="text-sm font-semibold text-sky-600">{forecast.wind.speed} km/h</p>
+                        </div>
+                    </div>
                 </div>
             )
             )
