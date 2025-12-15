@@ -29,7 +29,7 @@ export const CurrentWeatherDetails = ({ weather, isError, isLoading }: CurrentWe
                 <div className="flex-1 text-center md:text-left">
                     <p className="text-lg font-semibold text-gray-600">{date.fullDate} </p>
                     <p className="text-lg font-semibold text-gray-600">{date.time}</p>
-                    <div className="text-8xl font-bold text-blue-900 text-center mt-5">{trunkTemperature(weather.main.temp)} °C</div>
+                    <div className="text-8xl font-bold text-blue-900 text-center mt-5">{trunkTemperature(weather.main.temp)} °c</div>
                     <p className="text-lg font-semibold text-blue-900 mt-1 text-center">{weather.weather[0].description}</p>
                     <div className="flex justify-between w-full mb-4  mt-5 pl-3 pr-3">
                         <TemperatureRange
@@ -48,7 +48,7 @@ export const CurrentWeatherDetails = ({ weather, isError, isLoading }: CurrentWe
                 <div className="w-full md:w-1/2 bg-blue-50 rounded-lg p-4">
                     <h3 className="text-sm font-bold text-gray-600 mb-3">Details</h3>
                     <div className="grid grid-cols-2 gap-8">
-                        <DetailRow Icon={FaTemperatureFull} label="Feels like" value={`${trunkTemperature(weather.main.feels_like)} °C`} />
+                        <DetailRow Icon={FaTemperatureFull} label="Feels like" value={`${trunkTemperature(weather.main.feels_like)} °c`} />
                         <DetailRow Icon={FaWind} label="Wind" value={`${trunkTemperature(weather.wind.speed)} km/h`} />
                         <DetailRow Icon={FaWater} label="Humidity" value={`${trunkTemperature(weather.main.humidity)} %`} />
                         <DetailRow Icon={FaEye} label="Visibility" value={`${trunkTemperature(weather.visibility)} km`} />
@@ -80,7 +80,7 @@ const TemperatureRange = ({ name, value, Icon }: TemperatureRangeProps) => {
                 <Icon className="text-sky-800" />
                 <p className="text-lg text-sky-800">{name}</p>
             </div>
-            <p className="text-3xl text-sky-900 font-bold">{value} °C</p>
+            <p className="text-3xl text-sky-900 font-bold">{value} °c</p>
         </div>
     )
 }

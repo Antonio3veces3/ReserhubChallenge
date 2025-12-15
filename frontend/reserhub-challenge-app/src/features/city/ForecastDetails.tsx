@@ -2,7 +2,6 @@ import { FaCloud, FaEye, FaWater, FaWind } from "react-icons/fa";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import type { ForecastItem } from "../weather/types/types"
 import { convertDatestampToHumanDate } from "../../utils/dateConverter";
-import type { IconType } from "react-icons";
 import { trunkTemperature } from "../../utils/weatherUtils";
 
 
@@ -37,7 +36,7 @@ export const ForecastDetails = ({ isLoading, isError, forecastList }: ForecastWe
                     </div>
                     <div className="flex flex-col items-center">
                         <p className="text-2xl font-semibold text-blue-900">
-                            {trunkTemperature(forecast.main.temp)} °C
+                            {trunkTemperature(forecast.main.temp)} °c
                         </p>
                         <p className="text-sm font-medium text-blue-900">
                             {forecast.weather[0].description}

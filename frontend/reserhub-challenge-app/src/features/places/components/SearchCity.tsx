@@ -8,9 +8,9 @@ import { LoadingIndicator } from "../../../components/LoadingIndicator"
 
 export function SearchCity() {
     const [input, setInput] = useState<string>("")
-    const [searchPrefix, setSearchPrefix] = useState<string>("Col")
+    const [searchPrefix, setSearchPrefix] = useState<string>("")
 
-    const { data: placeData, isLoading: placeIsLoading } = useGetPlaceByPrefix(searchPrefix, { enabled: searchPrefix.trim().length > 0 })
+    const { data: placeData } = useGetPlaceByPrefix(searchPrefix, { enabled: searchPrefix.trim().length > 0 })
 
     const weatherQueries = useQueries({
         queries: (placeData?.data ?? []).map((place: any) => ({
@@ -32,6 +32,19 @@ export function SearchCity() {
         setSearchPrefix(input.trim())
     }
 
+    const resultBody = !weatherIsLoading && citiesWithWeather.length > 0 ? (
+        <ul className="flex flex-wrap gap-4 list-none justify-center">
+            {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
+                <li key={`${city.name}-${index}`} className="p-3">
+                    <CityWeatherCard data={{
+                        country: city.country,
+                        name: city.name,
+                        weather: city.weather
+                    }} />
+                </li>
+            ))}
+        </ul>)
+        : (<p className="flex justify-center text-xl mb-20 font-semibold text-gray-600">Cities not found</p>)
     return (
         <div className="w-full mx-auto">
             <form onSubmit={handleSearch} className="flex gap-2 mb-4 w-full justify-center">
@@ -52,19 +65,13 @@ export function SearchCity() {
             </form>
 
             <div className="w-full max-w-full mx-auto p-4">
-                {weatherIsLoading ? <LoadingIndicator /> : (
-                    <ul className="flex flex-wrap gap-4 list-none justify-center">
-                        {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
-                            <li key={`${city.name}-${index}`} className="p-3">
-                                <CityWeatherCard data={{
-                                    country: city.country,
-                                    name: city.name,
-                                    weather: city.weather
-                                }} />
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                {weatherIsLoading ?
+                    (<div className="flex justify-center">
+                        <LoadingIndicator />
+                    </div>)
+                    : (
+                        resultBody
+                    )}
 
             </div>
         </div>

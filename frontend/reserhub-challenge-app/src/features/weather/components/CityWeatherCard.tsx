@@ -29,7 +29,7 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
       <p className="text-center text-white-100 font-medium text-sm mb-1">{date.time}</p>
 
       <div className="text-center mb-2 rounded-lg py-4">
-        <div className="text-6xl font-bold mb-2">{trunkTemperature(weather.main.feels_like)} °C</div>
+        <p className="text-6xl font-bold mb-2">{trunkTemperature(weather.main.temp)} °c</p>
         <p className="text-lg text-blue-50 flex items-center justify-center gap-2">
           <FaCloud />
           {weather.weather[0].main}
@@ -56,7 +56,7 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
           <CategoryDetails
             Icon={FaTemperatureFull}
             categoryName="Feels like"
-            value={`${trunkTemperature(weather.main.feels_like)} °C`}
+            value={`${trunkTemperature(weather.main.feels_like)} °c`}
           />
           <CategoryDetails
             Icon={FaWind}
@@ -88,7 +88,7 @@ const TemperatureRange = ({ name, value }: TemperatureRangeProps) => {
   return (
     <div className="grid grid-cols-2 items-center">
       <p className="text-sm text-white">{name}:</p>
-      <p className="text-lg text-white font-bold">{value} °C</p>
+      <p className="text-lg text-white font-bold">{value} °c</p>
     </div>
   )
 }
