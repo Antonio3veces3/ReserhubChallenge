@@ -1,12 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
-import { FaCloud, FaCloudRain, FaEye, FaWind } from 'react-icons/fa'
-import { FaTemperatureFull } from 'react-icons/fa6'
-import type { IconType } from 'react-icons'
 import { useGetForecastWeather } from '../features/weather/hooks/useGetForecastWeather'
-import { LoadingIndicator } from '../components/LoadingIndicator'
-import { convertDatestampToHumanDate } from '../utils/dateConverter'
 import { useGetCurrentWeather } from '../features/weather/hooks/useGetCurrentWeather'
-import { trunkTemperature } from '../utils/weatherUtils'
 import { CurrentWeatherDetails } from '../features/city/CurrentWeatherDetails'
 import { ForecastDetails } from '../features/city/ForecastDetails'
 
@@ -46,8 +40,12 @@ export function City() {
             <div className="max-w-8xl mx-auto">
                 <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">{cityName}, {country}</h1>
 
-                <div className="flex flex-col md:flex-row gap-8 ">
-                    <CurrentWeatherDetails isError={currentWeatherIsError} isLoading={currentWeatherIsLoading} weather={dataCurrentWeather} />
+                <div className="flex flex-col md:flex-row gap-8 min-h-96 items-stretch">
+                    <CurrentWeatherDetails
+                        isError={currentWeatherIsError}
+                        isLoading={currentWeatherIsLoading}
+                        weather={dataCurrentWeather}
+                    />
 
                     <ForecastDetails
                         isError={forecastIsError}
