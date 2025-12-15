@@ -1,5 +1,4 @@
 import { LoadingIndicator } from "../../../components/LoadingIndicator"
-import { useGetPlacesByCountryCode } from "../hooks/useGetPlacesByCountryCode"
 import { useGetRandomPlaces } from "../hooks/useGetRandomPlaces";
 import type { Order } from "../types/commonTypes";
 import { CitiesWithWeather } from "./CitiesWithWeather"

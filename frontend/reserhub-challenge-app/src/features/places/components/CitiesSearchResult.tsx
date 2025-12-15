@@ -1,6 +1,7 @@
 import type { CityWeatherDetails } from '../types/commonTypes';
 import { LoadingIndicator } from '../../../components/LoadingIndicator';
 import { CityWeatherCard } from '../../weather/components/CityWeatherCard';
+import { useState } from 'react';
 
 
 interface CitiesSearchResultProps {
@@ -8,9 +9,11 @@ interface CitiesSearchResultProps {
     citiesWithWeather: CityWeatherDetails[]
 }
 export const CitiesSearchResult = ({ isLoading, citiesWithWeather }: CitiesSearchResultProps) => {
+    const [hidden, setHidden] = useState(false)
+    const hiddenProp = hidden ? 'hidden' : ''
 
     const resultBody = !isLoading && citiesWithWeather.length > 0 ? (
-        <ul className="flex flex-wrap gap-4 list-none justify-center">
+        <ul className={`flex flex-wrap gap-4 list-none justify-center ${hiddenProp}`}>
             {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
                 <li key={`${city.name}-${index}`} className="p-3">
                     <CityWeatherCard data={{
@@ -25,6 +28,13 @@ export const CitiesSearchResult = ({ isLoading, citiesWithWeather }: CitiesSearc
 
     return (
         <div className="w-full max-w-full mx-auto p-4">
+            {citiesWithWeather.length > 0 && <div className='pl-36 mb-4'>
+                <button
+                    onClick={() => setHidden(!hidden)}
+                    type='button'>
+                    {hidden ? "Show Results" : "Hide Results"}
+                </button>
+            </div>}
             {isLoading ?
                 (<div className="flex justify-center">
                     <LoadingIndicator />

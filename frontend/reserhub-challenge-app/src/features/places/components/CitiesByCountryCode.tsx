@@ -3,7 +3,7 @@ import { useGetPlacesByCountryCode } from "../hooks/useGetPlacesByCountryCode"
 import { CitiesWithWeather } from "./CitiesWithWeather"
 
 export const CitiesByCountryCode = () => {
-    const { data, isLoading, isError } = useGetPlacesByCountryCode('MX')
+    const { data, isLoading, isError } = useGetPlacesByCountryCode('US')
     if (isLoading) {
         return (
             <div className="flex justify-center">
@@ -19,5 +19,5 @@ export const CitiesByCountryCode = () => {
         )
     }
 
-    return <CitiesWithWeather headerTitle="Cities in Mexico" placesData={data} />
+    return <CitiesWithWeather headerTitle="Cities in USA" placesData={data} />
 }

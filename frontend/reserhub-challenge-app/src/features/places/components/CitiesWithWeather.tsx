@@ -1,10 +1,9 @@
 import React from "react";
-import type { CityWeatherDetails, Order } from "../types/commonTypes";
+import type { CityWeatherDetails } from "../types/commonTypes";
 import { fetchCurrentWeather } from "../../weather/api/fetchCurrentWeather";
 import { useQueries } from "@tanstack/react-query";
-import { CityWeatherCard } from "../../weather/components/CityWeatherCard";
 import type { PlacesData } from "../api/fetchPlaces";
-import { LoadingIndicator } from "../../../components/LoadingIndicator";
+import { CitiesSearchResult } from "./CitiesSearchResult";
 
 
 
@@ -36,16 +35,6 @@ export const CitiesWithWeather: React.FC<CitiesWithWeatherProps> = ({
 
     const Header = () => <h1 className="text-center text-6xl font-extrabold mb-20 text-green-900 mt-20">{headerTitle}</h1>
 
-    if (weatherIsLoading) {
-        return (
-            <section>
-                <Header />
-                <div className="flex justify-center">
-                    <LoadingIndicator />
-                </div>
-            </section>
-        );
-    }
 
     if (weatherIsSomeError) {
         const message = "Something went wrong while fetching places.";
@@ -62,21 +51,10 @@ export const CitiesWithWeather: React.FC<CitiesWithWeatherProps> = ({
     return (
         <section>
             <Header />
-            {citiesWithWeather.length === 0 ? (
-                <p className="flex justify-center text-xl mb-20 font-semibold text-gray-600">No cities found</p>
-            ) : (
-                <ul className="flex flex-wrap gap-4 list-none justify-center">
-                    {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
-                        <li key={`${city.name}-${index}`} className="p-3">
-                            <CityWeatherCard data={{
-                                country: city.country,
-                                name: city.name,
-                                weather: city.weather
-                            }} />
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <CitiesSearchResult
+                citiesWithWeather={citiesWithWeather}
+                isLoading={weatherIsLoading}
+            />
         </section>
     );
 };

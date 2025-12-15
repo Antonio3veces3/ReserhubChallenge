@@ -13,15 +13,15 @@ interface CityWeatherCardProps {
 export function CityWeatherCard({ data }: CityWeatherCardProps) {
   const { country, name, weather } = data
   const navigate = useNavigate()
-  const lat = weather.coord.lat
-  const lon = weather.coord.lon
+  const lat = weather!.coord.lat
+  const lon = weather!.coord.lon
 
 
-  const date = convertDatestampToHumanDate(weather.dt)
+  const date = convertDatestampToHumanDate(weather!.dt)
   return (
     <button
       type="button"
-      onClick={() => navigate(`/city?lat=${lat}&lon=${lon}&cityName=${name}&country=${country || weather.sys.country}`)}
+      onClick={() => navigate(`/city?lat=${lat}&lon=${lon}&cityName=${name}&country=${country || weather!.sys.country}`)}
       className="bg-linear-to-b from-blue-900 to-cyan-200 rounded-xl shadow-xl p-6 max-w-sm"
     >
       <h1 className="text-3xl font-bold text-center mb-2 text-white">{name}</h1>
@@ -29,21 +29,21 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
       <p className="text-center text-gray-300 font-medium text-sm mb-1">{date.time}</p>
 
       <div className="text-center mb-2 rounded-lg py-4">
-        <p className=" text-white text-6xl font-bold mb-2">{trunkTemperature(weather.main.temp)} °c</p>
+        <p className=" text-white text-6xl font-bold mb-2">{trunkTemperature(weather!.main.temp)} °c</p>
         <p className=" text-gray-200 text-lg  flex items-center justify-center gap-2">
           <FaCloud />
-          {weather.weather[0].description}
+          {weather!.weather![0].description}
         </p>
       </div>
 
       <div className="flex justify-between w-full mb-4 px-1">
         <TemperatureRange
           name="Min"
-          value={trunkTemperature(weather.main.temp_min)}
+          value={trunkTemperature(weather!.main.temp_min)}
         />
         <TemperatureRange
           name="Max"
-          value={trunkTemperature(weather.main.temp_max)}
+          value={trunkTemperature(weather!.main.temp_max)}
         />
       </div>
 
@@ -56,22 +56,22 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
           <CategoryDetails
             Icon={FaTemperatureFull}
             categoryName="Feels like"
-            value={`${trunkTemperature(weather.main.feels_like)} °c`}
+            value={`${trunkTemperature(weather!.main.feels_like)} °c`}
           />
           <CategoryDetails
             Icon={FaWind}
             categoryName="Wind"
-            value={`${trunkTemperature(weather.wind.speed)} km/h`}
+            value={`${trunkTemperature(weather!.wind.speed)} km/h`}
           />
           <CategoryDetails
             Icon={FaCloudRain}
             categoryName="Humidity"
-            value={`${trunkTemperature(weather.main.humidity)} %`}
+            value={`${trunkTemperature(weather!.main.humidity)} %`}
           />
           <CategoryDetails
             Icon={FaEye}
             categoryName="Visibiliy"
-            value={`${weather.visibility} km`}
+            value={`${weather!.visibility} km`}
           />
         </div>
       </div>
