@@ -53,3 +53,20 @@ export const fetchPlaceByPrefix = async (prefix: string): Promise<any> => {
 
   return response.data;
 };
+
+export const fetchPlacesByCountryCode = async (
+  countryCode: string
+): Promise<any> => {
+  const url = `${config.API_BASE_URL}/places`;
+  const providedToken = getJwt();
+  const headers = providedToken
+    ? { Authorization: `Bearer ${providedToken}` }
+    : undefined;
+
+  const response = await axios.get<any>(url, {
+    headers,
+    params: { country_code: countryCode },
+  });
+
+  return response.data;
+};

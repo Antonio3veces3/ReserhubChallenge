@@ -1,4 +1,5 @@
-import CitiesByPopulation from "../features/places/components/CitiesByPopulation"
+import { CitiesByCountryCode } from "../features/places/components/CitiesByCountryCode"
+import { CitiesByPopulationRefactor } from "../features/places/components/CitiesByPopulationRefactor"
 import { SearchCity } from "../features/places/components/SearchCity"
 
 export function Home() {
@@ -10,12 +11,14 @@ export function Home() {
                 <h3 className="text-center text-2xl font-light mb-10 text-green-800">and find how is the weather</h3>
                 <SearchCity />
             </div>
-
             <div className="rounded-xl shadow-2xl">
-                <CitiesByPopulation orderBy="DESC" title="Most populated cities" />
+                <CitiesByCountryCode />
             </div>
             <div className="rounded-xl shadow-2xl">
-                <CitiesByPopulation orderBy="ASC" title="Less populated cities" />
+                <CitiesByPopulationRefactor orderBy="DESC" />
+            </div>
+            <div className="rounded-xl shadow-2xl">
+                <CitiesByPopulationRefactor orderBy="ASC" />
             </div>
         </div>
     )

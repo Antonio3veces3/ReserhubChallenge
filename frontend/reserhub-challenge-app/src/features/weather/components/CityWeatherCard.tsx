@@ -32,7 +32,7 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
         <p className="text-6xl font-bold mb-2">{trunkTemperature(weather.main.temp)} °c</p>
         <p className="text-lg text-blue-50 flex items-center justify-center gap-2">
           <FaCloud />
-          {weather.weather[0].main}
+          {weather.weather[0].description}
         </p>
       </div>
 
