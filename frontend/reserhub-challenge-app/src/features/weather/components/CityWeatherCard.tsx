@@ -21,8 +21,8 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
   return (
     <button
       type="button"
-      onClick={() => navigate(`/city?lat=${lat}&lon=${lon}&cityName=${name}&country=${country}`)}
-      className="bg-linear-to-b from-blue-900 to-cyan-200 rounded-xl shadow-lg p-6 max-w-sm"
+      onClick={() => navigate(`/city?lat=${lat}&lon=${lon}&cityName=${name}&country=${country || weather.sys.country}`)}
+      className="bg-linear-to-b from-blue-900 to-cyan-200 rounded-xl shadow-xl p-6 max-w-sm"
     >
       <h1 className="text-3xl font-bold text-center mb-2 text-white">{name}</h1>
       <p className="text-center text-gray-300 font-semibold text-md mb-1">{date.fullDate}</p>
@@ -102,7 +102,7 @@ const CategoryDetails = ({ Icon, categoryName, value }: CategoryDetailsProps) =>
   return (
     <div className="flex items-center gap-2">
       <div className="p-2 bg-cyan-600 rounded-2xl">
-        <Icon />
+        <Icon className="text-white" />
       </div>
       <div>
         <p className="text-sm text-gray-300">{categoryName}</p>

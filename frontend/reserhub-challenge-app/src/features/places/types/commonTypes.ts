@@ -36,6 +36,9 @@ export interface IWeather {
   clouds: {
     all: number;
   };
+  sys: {
+    country?: string;
+  };
   dt: number;
   timezone: number;
   name: string;
