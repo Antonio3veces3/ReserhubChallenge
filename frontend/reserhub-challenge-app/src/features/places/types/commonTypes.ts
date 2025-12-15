@@ -47,5 +47,5 @@ export interface IWeather {
 export interface CityWeatherDetails {
   country: string;
   name: string;
-  weather: IWeather;
+  weather?: IWeather;
 }

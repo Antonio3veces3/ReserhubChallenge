@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "../../../config/config";
 
-interface ReserHubPlace {
+export interface ReserHubPlace {
   id: number;
   country: string;
   display: string;
@@ -11,7 +11,7 @@ interface ReserHubPlace {
 
 export const fetchReserhubPlacesByPrefix = async (
   prefix?: string
-): Promise<any> => {
+): Promise<ReserHubPlace[]> => {
   const url = `${config.API_BASE_URL}/reserhub/places`;
   //   const providedToken = getJwt();
   //   const headers = providedToken
