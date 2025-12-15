@@ -1,0 +1,13 @@
+export const COLORS = () => {
+  return {
+    GREEN_SECONDARY: "#00D287",
+    GREEN_MAIN: "#048759",
+    ORANGE: "#FF6600",
+    PURPLE: "#A06FFF",
+    BACKGROUND: "#FFFFFF",
+    TEXT_PRIMARY: "#212121",
+    TEXT_SECONDARY: "#666666",
+    MAIN_BUTTON: "#00D287",
+    LINK_SECONDARY: "#00D287",
+  };
+};

@@ -31,7 +31,11 @@ export const signUpController = async (req: Request, res: Response) => {
     return res.status(201).json({
       message: 'User registered successfully',
       token: newJwt,
-      user: { id: newUser._id, username: newUser.username },
+      user: {
+        id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+      },
     });
   } catch (error) {
     console.error('Error en sign up:', error);
@@ -41,7 +45,7 @@ export const signUpController = async (req: Request, res: Response) => {
 
 export const signInController = async (req: Request, res: Response) => {
   try {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     const user = await UserModel.findOne({ email }).select('+password');
 
