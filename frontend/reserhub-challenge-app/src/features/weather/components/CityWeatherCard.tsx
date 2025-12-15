@@ -22,15 +22,15 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
     <button
       type="button"
       onClick={() => navigate(`/city?lat=${lat}&lon=${lon}&cityName=${name}&country=${country}`)}
-      className="bg-linear-to-br from-blue-400 to-blue-400 rounded-xl shadow-lg p-6 max-w-sm text-white"
+      className="bg-linear-to-b from-blue-900 to-cyan-200 rounded-xl shadow-lg p-6 max-w-sm"
     >
-      <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
-      <p className="text-center text-white-100 font-semibold text-md mb-1">{date.fullDate}</p>
-      <p className="text-center text-white-100 font-medium text-sm mb-1">{date.time}</p>
+      <h1 className="text-3xl font-bold text-center mb-2 text-white">{name}</h1>
+      <p className="text-center text-gray-300 font-semibold text-md mb-1">{date.fullDate}</p>
+      <p className="text-center text-gray-300 font-medium text-sm mb-1">{date.time}</p>
 
       <div className="text-center mb-2 rounded-lg py-4">
-        <p className="text-6xl font-bold mb-2">{trunkTemperature(weather.main.temp)} °c</p>
-        <p className="text-lg text-blue-50 flex items-center justify-center gap-2">
+        <p className=" text-white text-6xl font-bold mb-2">{trunkTemperature(weather.main.temp)} °c</p>
+        <p className=" text-gray-200 text-lg  flex items-center justify-center gap-2">
           <FaCloud />
           {weather.weather[0].description}
         </p>
@@ -47,8 +47,8 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
         />
       </div>
 
-      <div className="bg-blue-500 rounded-lg p-4 py-2">
-        <h2 className="text-sm font-semibold uppercase text-blue-100 mb-4 text-center">
+      <div className="bg-blue-900 rounded-lg p-4 py-2">
+        <h2 className="text-sm font-semibold uppercase text-gray-200 mb-4 text-center">
           Details
         </h2>
 
@@ -101,12 +101,12 @@ interface CategoryDetailsProps {
 const CategoryDetails = ({ Icon, categoryName, value }: CategoryDetailsProps) => {
   return (
     <div className="flex items-center gap-2">
-      <div className="p-1">
+      <div className="p-2 bg-cyan-600 rounded-2xl">
         <Icon />
       </div>
       <div>
-        <p className="text-sm text-blue-100">{categoryName}</p>
-        <p className="font-bold text-lg"> {value}</p>
+        <p className="text-sm text-gray-300">{categoryName}</p>
+        <p className="text-gray-200 font-bold text-lg"> {value}</p>
       </div>
     </div>
   )
