@@ -4,7 +4,7 @@ import { convertDatestampToHumanDate } from "../../utils/dateConverter"
 import { trunkTemperature } from "../../utils/weatherUtils"
 import type { IWeather } from "../places/types/commonTypes"
 import { FaTemperatureFull } from "react-icons/fa6"
-import { FaCloud, FaCloudRain, FaEye, FaThermometerEmpty, FaThermometerFull, FaUmbrellaBeach, FaWind } from "react-icons/fa"
+import { FaCloud, FaEye, FaThermometerEmpty, FaThermometerFull, FaUmbrellaBeach, FaWater, FaWind } from "react-icons/fa"
 
 interface CurrentWeatherDetailsProps {
     isLoading: boolean,
@@ -50,7 +50,7 @@ export const CurrentWeatherDetails = ({ weather, isError, isLoading }: CurrentWe
                     <div className="grid grid-cols-2 gap-8">
                         <DetailRow Icon={FaTemperatureFull} label="Feels like" value={`${trunkTemperature(weather.main.feels_like)} °C`} />
                         <DetailRow Icon={FaWind} label="Wind" value={`${trunkTemperature(weather.wind.speed)} km/h`} />
-                        <DetailRow Icon={FaCloudRain} label="Humidity" value={`${trunkTemperature(weather.main.humidity)} %`} />
+                        <DetailRow Icon={FaWater} label="Humidity" value={`${trunkTemperature(weather.main.humidity)} %`} />
                         <DetailRow Icon={FaEye} label="Visibility" value={`${trunkTemperature(weather.visibility)} km`} />
                         <DetailRow Icon={FaUmbrellaBeach} label="Sea level" value={`${weather.main.sea_level} hPa`} />
                         <DetailRow Icon={FaCloud} label="Cloud %" value={`${weather.clouds.all} %`} />
