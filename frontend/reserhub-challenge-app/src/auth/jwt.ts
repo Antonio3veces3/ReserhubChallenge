@@ -1,3 +1,3 @@
 export const getJwt = (): string => {
-  return localStorage.getItem("jwt") || "token";
+  return localStorage.getItem("jwt") || "";
 };

@@ -45,6 +45,7 @@ export function SearchCity() {
             ))}
         </ul>)
         : (<p className="flex justify-center text-xl mb-20 font-semibold text-gray-600">Cities not found</p>)
+
     return (
         <div className="w-full mx-auto">
             <form onSubmit={handleSearch} className="flex gap-2 mb-4 w-full justify-center">

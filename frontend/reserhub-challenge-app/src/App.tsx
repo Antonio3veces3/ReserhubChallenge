@@ -6,6 +6,7 @@ import { Home } from './pages/Home'
 import { City } from './pages/City'
 import { Navbar } from './components/Navbar'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function AppLayout() {
   const location = useLocation()
@@ -20,8 +21,15 @@ function AppLayout() {
         <Route path="/auth/sign-up" element={<SignUp />} />
 
         {/* App Routes */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/city" element={<City />} />
+        <Route path="/home" element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } />
+        <Route path="/city" element={
+          <ProtectedRoute>
+            <City />
+          </ProtectedRoute>} />
 
         {/* Redirect root to sign-in */}
         <Route path="/" element={<Navigate to="/auth/sign-in" replace />} />

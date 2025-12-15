@@ -33,7 +33,7 @@ export function SignIn() {
                 localStorage.setItem('email', email);
 
                 setIsError(false)
-                navigate('/home');
+                navigate('/home', { replace: true });
             }
 
 

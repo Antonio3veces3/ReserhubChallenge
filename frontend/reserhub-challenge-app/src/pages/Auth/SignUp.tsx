@@ -11,6 +11,7 @@ export function SignUp() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isError, setIsError] = useState(false)
 
     const navigate = useNavigate();
 
@@ -29,14 +30,15 @@ export function SignUp() {
                 localStorage.setItem('jwt', response.data.token);
                 localStorage.setItem('username', response.data.user.username);
                 localStorage.setItem('email', response.data.user.email);
-
-                navigate('/home');
+                setIsError(false)
+                navigate('/home', { replace: false });
             }
 
 
 
         } catch (err: any) {
             console.error('Login error:', err.response?.data || err.message);
+            setIsError(true)
         }
     };
 
@@ -85,6 +87,11 @@ export function SignUp() {
                         onChange={(e) => setPassword(e.target.value)}
 
                     />
+
+                    {isError && (
+                        <p className='font-sm  text-red-800'>Error creating account. Please try again.</p>
+                    )}
+
                     <button
                         type="submit"
                         className={styles.button}

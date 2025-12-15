@@ -23,7 +23,7 @@ export const CitiesByPopulationRefactor = ({ orderBy = 'ASC' }: CitiesByPopulati
     if (isError) {
         return (
             <div className="flex justify-center">
-                <LoadingIndicator />
+                <h2>Something went wrong :c</h2>
             </div>
         )
     }

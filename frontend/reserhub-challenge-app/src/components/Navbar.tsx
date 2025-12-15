@@ -72,7 +72,7 @@ const RightSectionNavbar = ({ username, navigate }: RightSectionNavbarProps) => 
         localStorage.removeItem('jwt')
         localStorage.removeItem('email')
         setIsDropdownOpen(false)
-        navigate('/auth/sign-in')
+        navigate('/auth/sign-in', { replace: true })
     }
 
     const dropdownIcon = isDropdownOpen ? <FaAngleUp /> : <FaAngleDown />
