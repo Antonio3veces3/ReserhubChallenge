@@ -27,7 +27,7 @@ export const CitiesSearchResult = ({ isLoading, citiesWithWeather }: CitiesSearc
         : (<p className="flex justify-center text-xl mb-20 font-semibold text-gray-600">Cities not found</p>)
 
     return (
-        <div className="w-full max-w-full mx-auto p-4">
+        <div className="w-full max-w-full mx-auto p-4 rounded-xl shadow-2xl">
             {citiesWithWeather.length > 0 && <div className='pl-36 mb-4'>
                 <button
                     onClick={() => setHidden(!hidden)}

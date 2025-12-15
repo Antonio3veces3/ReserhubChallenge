@@ -33,7 +33,7 @@ export const CitiesWithWeather: React.FC<CitiesWithWeatherProps> = ({
         weather: weatherQueries[index].data!,
     }))
 
-    const Header = () => <h1 className="text-center text-6xl font-extrabold mb-20 text-green-900 mt-20">{headerTitle}</h1>
+    const Header = () => <h1 className="text-left pl-5 text-6xl font-bold mb-5 text-green-900 mt-20">{headerTitle}</h1>
 
 
     if (weatherIsSomeError) {
@@ -49,12 +49,14 @@ export const CitiesWithWeather: React.FC<CitiesWithWeatherProps> = ({
 
 
     return (
-        <section>
+        <div>
             <Header />
-            <CitiesSearchResult
-                citiesWithWeather={citiesWithWeather}
-                isLoading={weatherIsLoading}
-            />
-        </section>
+            <section>
+                <CitiesSearchResult
+                    citiesWithWeather={citiesWithWeather}
+                    isLoading={weatherIsLoading}
+                />
+            </section>
+        </div>
     );
 };

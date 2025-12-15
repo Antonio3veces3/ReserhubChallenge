@@ -5,7 +5,7 @@ interface SearchBarProps {
 }
 export const SearchBar = ({ handleSearch, value, setValue }: SearchBarProps) => {
     return (
-        <form onSubmit={handleSearch} className="flex gap-2 mb-4 w-full justify-center">
+        <form onSubmit={handleSearch} className="flex gap-2 mb-4 w-full justify-center pl-5 pr-5">
             <input
                 type="text"
                 value={value}

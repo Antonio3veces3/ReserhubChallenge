@@ -25,8 +25,8 @@ export const CurrentWeatherDetails = ({ weather, isError, isLoading }: CurrentWe
     if (!isLoading && weather) {
         const date = convertDatestampToHumanDate(weather.dt)
         body = (
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                <div className="flex-1 text-center md:text-left">
+            <div className="flex flex-col xl:flex-row items-center xl:items-start gap-6">
+                <div className="flex-1 text-center xl:text-left">
                     <p className="text-lg font-semibold text-gray-600">{date.fullDate} </p>
                     <p className="text-lg font-semibold text-gray-600">{date.time}</p>
                     <div className="text-8xl font-bold text-blue-900 text-center mt-5">{trunkTemperature(weather.main.temp)} °c</div>
@@ -45,9 +45,9 @@ export const CurrentWeatherDetails = ({ weather, isError, isLoading }: CurrentWe
                     </div>
                 </div>
 
-                <div className="w-full md:w-1/2 bg-blue-50 rounded-lg p-4">
-                    <h3 className="text-sm font-bold text-gray-600 mb-3">Details</h3>
-                    <div className="grid grid-cols-2 gap-8">
+                <div className="w-full xl:w-1/2 bg-blue-50 rounded-lg p-4">
+                    <h3 className="text-lg xl:text-sm text-center xl:text-left font-bold text-gray-600 mb-3">Details</h3>
+                    <div className="grid grid-cols-2 gap-8 justify-items-center items-center">
                         <DetailRow Icon={FaTemperatureFull} label="Feels like" value={`${trunkTemperature(weather.main.feels_like)} °c`} />
                         <DetailRow Icon={FaWind} label="Wind" value={`${trunkTemperature(weather.wind.speed)} km/h`} />
                         <DetailRow Icon={FaWater} label="Humidity" value={`${trunkTemperature(weather.main.humidity)} %`} />
@@ -60,7 +60,7 @@ export const CurrentWeatherDetails = ({ weather, isError, isLoading }: CurrentWe
             </div>)
     }
     return (
-        <section className="md:w-1/2 bg-white rounded-xl shadow-2xl p-6 ">
+        <section className="xl:w-1/2 bg-white rounded-xl shadow-2xl p-6 ">
             <h2 className="text-xl font-bold text-gray-600 mb-4 mt-">Current weather</h2>
             {body}
         </section>

@@ -29,7 +29,7 @@ export function City() {
                 </div>
                 <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">{cityName}, {country}</h1>
 
-                <div className="flex flex-col md:flex-row gap-8 min-h-96 items-stretch">
+                <div className="flex flex-col xl:flex-row gap-8 min-h-96 items-stretch">
                     <CurrentWeatherDetails
                         isError={currentWeatherIsError}
                         isLoading={currentWeatherIsLoading}
