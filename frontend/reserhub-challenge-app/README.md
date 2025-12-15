@@ -1,4 +1,4 @@
-# 🚍☀️ ReserHub - Weather
+# 🚍☀️ ReserHub Challenge - Frontend
 
 > A comprehensive, React-based weather application for instant, accurate forecasts and easy city exploration.
 
