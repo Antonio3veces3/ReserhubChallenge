@@ -1,6 +1,9 @@
 import React from "react";
 import { useGetRandomPlaces } from "../hooks/useGetRandomPlaces";
-import type { Order } from "../types/commonTypes";
+import type { CityWeatherDetails, Order } from "../types/commonTypes";
+import { fetchCurrentWeather } from "../../weather/api/fetchCurrentWeather";
+import { useQueries } from "@tanstack/react-query";
+import { CityWeatherCard } from "../../weather/components/CityWeatherCard";
 
 
 
@@ -13,9 +16,25 @@ const CitiesByPopulation: React.FC<CitiesByPopulationProps> = ({
     title = "Cities by population",
     orderBy = "DESC",
 }) => {
-    const { data, isLoading, isError, } = useGetRandomPlaces(orderBy);
+    const { data: placesData, isLoading, isError, } = useGetRandomPlaces(orderBy);
 
-    if (isLoading) {
+    const weatherQueries = useQueries({
+        queries: (placesData?.data ?? []).map((place: any) => ({
+            queryKey: ["places", "weather", `${place.latitude},${place.longitude}`],
+            queryFn: () => fetchCurrentWeather({ lat: place.latitude, lon: place.longitude }),
+            staleTime: 10 * 60 * 1000, // 10 minutes
+        })),
+    })
+
+    const weatherIsLoading = weatherQueries.some((query) => query.isLoading)
+    const citiesWithWeather: CityWeatherDetails[] = (placesData?.data ?? []).map((place: any, index: any) => ({
+        name: place.name,
+        country: place.country,
+        weather: weatherQueries[index].data!,
+    }))
+
+
+    if (weatherIsLoading) {
         return (
             <section>
                 <h3>{title}</h3>
@@ -34,18 +53,23 @@ const CitiesByPopulation: React.FC<CitiesByPopulationProps> = ({
         );
     }
 
-    const places = data?.data ?? [];
 
 
     return (
         <section>
-            <h3>{title}</h3>
-            {places.length === 0 ? (
+            <h1 className="text-center text-6xl font-extrabold mb-20 text-green-900 mt-20">{title}</h1>
+            {citiesWithWeather.length === 0 ? (
                 <p>No cities found</p>
             ) : (
-                <ul>
-                    {places.map((p) => (
-                        <li key={p.id}>{p.name}</li>
+                <ul className="flex flex-wrap gap-4 list-none justify-center">
+                    {citiesWithWeather.map((city: CityWeatherDetails, index: number) => (
+                        <li key={`${city.name}-${index}`} className="p-3">
+                            <CityWeatherCard data={{
+                                country: city.country,
+                                name: city.name,
+                                weather: city.weather
+                            }} />
+                        </li>
                     ))}
                 </ul>
             )}

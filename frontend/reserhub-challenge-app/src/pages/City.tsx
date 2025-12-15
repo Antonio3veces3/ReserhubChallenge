@@ -19,22 +19,6 @@ export function City() {
     const { data: dataForecast, isLoading: forecastIsLoading, isError: forecastIsError } = useGetForecastWeather({ lat: latNumber, lon: lonNumber });
 
 
-
-    // Hardcoded design data
-    const current = {
-        city: 'Barcelona',
-        country: 'ES',
-        datetime: 'Dec 14, 2025 — 16:00',
-        temp: 21.3,
-        main: 'Partly Cloudy',
-        feels_like: 20.8,
-        temp_min: 18.0,
-        temp_max: 22.5,
-        humidity: 60,
-        wind: 14,
-        visibility: 12,
-    }
-
     return (
         <div className="p-6">
             <div className="max-w-8xl mx-auto">

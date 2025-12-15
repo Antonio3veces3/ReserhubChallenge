@@ -27,11 +27,6 @@ export function SearchCity() {
         weather: weatherQueries[index].data,
     }))
 
-    if (!weatherIsLoading) {
-        console.log(citiesWithWeather);
-
-    }
-
     const handleSearch = (e?: React.FormEvent) => {
         e?.preventDefault()
         setSearchPrefix(input.trim())
