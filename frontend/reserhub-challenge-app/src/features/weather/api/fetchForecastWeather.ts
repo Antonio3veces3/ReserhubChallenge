@@ -1,14 +1,13 @@
 import axios from "axios";
 import { getJwt } from "../../../auth/jwt";
 import { config } from "../../../config/config";
-import type { CityCoordenates } from "../types/types";
-import type { IWeather } from "../../places/types/commonTypes";
+import type { CityCoordenates, ForecastData } from "../types/types";
 
-export const fetchCurrentWeather = async ({
+export const fetchForecastWeather = async ({
   lat,
   lon,
-}: CityCoordenates): Promise<IWeather> => {
-  const url = `${config.API_BASE_URL}/weather/current`;
+}: CityCoordenates): Promise<ForecastData> => {
+  const url = `${config.API_BASE_URL}/weather/forecast`;
   const providedToken = getJwt();
   const headers = providedToken
     ? { Authorization: `Bearer ${providedToken}` }

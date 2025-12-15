@@ -1,8 +1,9 @@
-import React, { useEffect, useEffectEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaCloud, FaCloudRain, FaEye, FaWind } from "react-icons/fa";
 import type { CityWeatherDetails } from "../../places/types/commonTypes";
 import { FaTemperatureFull } from "react-icons/fa6";
 import type { IconType } from "react-icons";
+import { trunkTemperature } from "../../../utils/weatherUtils";
 
 interface CityWeatherCardProps {
   data: CityWeatherDetails;
@@ -10,14 +11,21 @@ interface CityWeatherCardProps {
 
 export function CityWeatherCard({ data }: CityWeatherCardProps) {
   const { country, name, weather } = data
+  const navigate = useNavigate()
+  const lat = weather.coord.lat
+  const lon = weather.coord.lon
 
   return (
-    <div className="bg-linear-to-br from-blue-400 to-blue-400 rounded-xl shadow-lg p-6 max-w-sm text-white">
+    <button
+      type="button"
+      onClick={() => navigate(`/city?lat=${lat}&lon=${lon}&cityName=${name}&country=${country}`)}
+      className="bg-linear-to-br from-blue-400 to-blue-400 rounded-xl shadow-lg p-6 max-w-sm text-white"
+    >
       <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
       <p className="text-center text-blue-100 text-sm mb-1">{weather.dt}</p>
 
       <div className="text-center mb-2 rounded-lg py-4">
-        <div className="text-6xl font-bold mb-2">{removeDecimalValues(weather.main.feels_like)} °C</div>
+        <div className="text-6xl font-bold mb-2">{trunkTemperature(weather.main.feels_like)} °C</div>
         <p className="text-lg text-blue-50 flex items-center justify-center gap-2">
           <FaCloud />
           {weather.weather[0].main}
@@ -27,11 +35,11 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
       <div className="flex justify-between w-full mb-4 px-1">
         <TemperatureRange
           name="Min"
-          value={removeDecimalValues(weather.main.temp_min)}
+          value={trunkTemperature(weather.main.temp_min)}
         />
         <TemperatureRange
           name="Max"
-          value={removeDecimalValues(weather.main.temp_max)}
+          value={trunkTemperature(weather.main.temp_max)}
         />
       </div>
 
@@ -44,17 +52,17 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
           <CategoryDetails
             Icon={FaTemperatureFull}
             categoryName="Feels like"
-            value={`${removeDecimalValues(weather.main.feels_like)} °C`}
+            value={`${trunkTemperature(weather.main.feels_like)} °C`}
           />
           <CategoryDetails
             Icon={FaWind}
             categoryName="Wind"
-            value={`${removeDecimalValues(weather.wind.speed)} km/h`}
+            value={`${trunkTemperature(weather.wind.speed)} km/h`}
           />
           <CategoryDetails
             Icon={FaCloudRain}
             categoryName="Humidity"
-            value={`${removeDecimalValues(weather.main.humidity)} %`}
+            value={`${trunkTemperature(weather.main.humidity)} %`}
           />
           <CategoryDetails
             Icon={FaEye}
@@ -63,7 +71,7 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
@@ -98,8 +106,4 @@ const CategoryDetails = ({ Icon, categoryName, value }: CategoryDetailsProps) =>
       </div>
     </div>
   )
-}
-
-const removeDecimalValues = (number: number): number => {
-  return Math.trunc(number);
 }
