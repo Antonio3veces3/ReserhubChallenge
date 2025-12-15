@@ -7,6 +7,7 @@ export interface ExternalApiConfig {
 export interface ExternalApis {
   GEO_DB_CITIES_API: ExternalApiConfig;
   OPEN_WEATHER_API: ExternalApiConfig;
+  RESERHUB_API_BASE_URL: ExternalApiConfig;
 }
 
 export const EXTERNAL_APIS: ExternalApis = {
@@ -15,5 +16,8 @@ export const EXTERNAL_APIS: ExternalApis = {
   },
   OPEN_WEATHER_API: {
     BASE_URL: config.OPEN_WEATHER_API_BASE_URL || '',
+  },
+  RESERHUB_API_BASE_URL: {
+    BASE_URL: config.RESERHUB_API_BASE_URL || '',
   },
 };

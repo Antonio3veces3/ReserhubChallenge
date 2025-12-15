@@ -45,6 +45,8 @@ You need to have **Node.js >= v.22.21.1** and **npm** installed on your system.
 1.  Install dependencies:
 
 ```bash
+cd backend/
+
 npm install
 ```
 

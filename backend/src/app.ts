@@ -5,6 +5,7 @@ import {
   authRoutes,
   citiesRoutes,
   homeRoutes,
+  reserHubRoutes,
   weatherRoutes,
 } from './routes/index.ts';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/v1/', homeRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/places', citiesRoutes);
+app.use('/api/v1/reserhub/places', reserHubRoutes);
 app.use('/api/v1/weather', weatherRoutes);
 
 app.use(errorHandler);
