@@ -7,6 +7,7 @@ import { FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaMapMarkerAlt, FaMapPin } fr
 import { FaMapLocationDot } from 'react-icons/fa6'
 import { ForecastNew } from '../features/city/ForecastNew'
 import { CurrentWeatherNew } from '../features/city/CurrentWeatherNew'
+import { ScrollToTop } from '../components/ScrollToTop'
 
 export function City() {
     const [searchParams] = useSearchParams()
@@ -24,6 +25,7 @@ export function City() {
 
     return (
         <div className="p-6 relative min-h-screen">
+            <ScrollToTop />
             <div className="absolute inset-0 bg-[url(/src/image/cloudySky.jpg)] bg-cover bg-center opacity-100" />
             <div className="max-w-8xl mx-auto relative z-10">
                 <h1 className="text-6xl font-bold text-white mt-10 text-center tracking-wider">{cityName}, {country}</h1>
