@@ -10,11 +10,14 @@ import { CitiesSearchResult } from "./CitiesSearchResult";
 interface CitiesWithWeatherProps {
     headerTitle: string;
     placesData?: PlacesData;
+    description?: string;
+
 }
 
 export const CitiesWithWeather: React.FC<CitiesWithWeatherProps> = ({
     headerTitle,
-    placesData
+    placesData,
+    description
 }) => {
     const weatherQueries = useQueries({
         queries: (placesData?.data ?? []).map((place: any) => ({
@@ -33,30 +36,40 @@ export const CitiesWithWeather: React.FC<CitiesWithWeatherProps> = ({
         weather: weatherQueries[index].data!,
     }))
 
-    const Header = () => <h1 className="text-left pl-5 text-6xl font-bold mb-5 text-green-900 mt-20">{headerTitle}</h1>
-
 
     if (weatherIsSomeError) {
         const message = "Something went wrong while fetching places.";
         return (
             <section>
-                <Header />
+                <Header title={headerTitle} description={description} />
                 <p style={{ color: "var(--color-danger, #b00020)" }}>Error: {message}</p>
             </section>
         );
     }
 
-
-
     return (
-        <div>
-            <Header />
+        <div className="pl-10 pr-10">
+            <Header title={headerTitle} description={description} />
             <section>
                 <CitiesSearchResult
                     citiesWithWeather={citiesWithWeather}
                     isLoading={weatherIsLoading}
+                    enableHideButton={false}
                 />
             </section>
         </div>
     );
 };
+
+interface HeaderProps {
+    title: string;
+    description?: string;
+}
+const Header = ({ title, description }: HeaderProps) => {
+    return (
+        <div className="pl-20 pr-20 mb-5">
+            <h1 className="text-left text-2xl font-bold text-sky-900 mt-5">{title}</h1>
+            {description && <p className="text-lg font-medium text-gray-600 mt-2">{description}</p>}
+        </div>
+    )
+}

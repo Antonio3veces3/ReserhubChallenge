@@ -19,5 +19,7 @@ export const CitiesByCountryCode = () => {
         )
     }
 
-    return <CitiesWithWeather headerTitle="Cities in USA" placesData={data} />
+    const title = "Explore Your Nation's Weather."
+    const description = "Easily view real-time weather conditions and forecasts for key cities across your country. Click on any city to dive into the details!"
+    return <CitiesWithWeather headerTitle={title} placesData={data} description={description} />
 }

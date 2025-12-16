@@ -35,12 +35,21 @@ export const ReserhubCities = () => {
         setSearchPrefix(prefix)
     }
     return (
-        <div>
-            <SearchBar value={prefix} setValue={setPrefix} handleSearch={handleSearch} />
-            <CitiesSearchResult
-                citiesWithWeather={citiesWithWeather}
-                isLoading={placesIsLoading || weatherIsLoading}
-            />
+        <div className="h-auto">
+            <div className="pt-20 pb-10 relative">
+                <div className="absolute inset-0 bg-[url(/src/image/travel.jpg)] bg-cover bg-center opacity-75" />
+                <div className="relative z-10">
+                    <h1 className="text-center text-4xl font-bold mb-5 text-gray-700">Hi, where will be your next trip?</h1>
+                    <h3 className="text-center text-2xl font-normal text-gray-700">Type the city you are looking for</h3>
+                    <h3 className="text-center text-2xl font-normal mb-10 text-gray-700">and find how is the weather</h3>
+                    <SearchBar value={prefix} setValue={setPrefix} handleSearch={handleSearch} />
+                    <CitiesSearchResult
+                        citiesWithWeather={citiesWithWeather}
+                        isLoading={placesIsLoading || weatherIsLoading}
+                    />
+                </div>
+
+            </div>
         </div>
     )
 }
