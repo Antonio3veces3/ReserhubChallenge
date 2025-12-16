@@ -29,13 +29,17 @@ export const CitiesSearchResult = ({ isLoading, citiesWithWeather, enableHideBut
 
     return (
         <div className="w-full max-w-full mx-auto p-4">
-            {citiesWithWeather.length > 0 && enableHideButton && <div className='pl-36 mb-4'>
-                <button
-                    onClick={() => setHidden(!hidden)}
-                    type='button'>
-                    {hidden ? "Show Results" : "Hide Results"}
-                </button>
-            </div>}
+            {citiesWithWeather.length > 0 && enableHideButton && (
+                <div className='flex justify-center mb-5'>
+                    <button
+                        onClick={() => setHidden(!hidden)}
+                        type='button'
+                        className="rounded text-body box-border border border-default-medium font-medium leading-5 text-sm px-4 py-2.5 hover:bg-sky-50"
+                    >
+                        {hidden ? "Show Results" : "Hide Results"}
+                    </button>
+                </div>
+            )}
             {isLoading ?
                 (<div className="flex justify-center">
                     <LoadingIndicator />

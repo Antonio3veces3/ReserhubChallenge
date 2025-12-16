@@ -67,7 +67,7 @@ interface HeaderProps {
 }
 const Header = ({ title, description }: HeaderProps) => {
     return (
-        <div className="pl-5 mb-5">
+        <div className="pl-20 pr-20 mb-5">
             <h1 className="text-left text-2xl font-bold text-sky-900 mt-5">{title}</h1>
             {description && <p className="text-lg font-medium text-gray-600 mt-2">{description}</p>}
         </div>
