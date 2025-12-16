@@ -21,5 +21,6 @@ export const SearchBar = ({ handleSearch, value, setValue }: SearchBarProps) => 
                 Search
             </button>
         </form>
+
     )
 }

@@ -21,7 +21,7 @@ export const CityCategoryTabs = () => {
         "tab3": <CitiesByPopulationRefactor orderBy="ASC" />
     }
     return (
-        <div className="w-full justify-center justify-items-center mt-10">
+        <div className="ml-20 mr-20 justify-center justify-items-center mt-10 rounded-xl shadow-2xl bg-white pt-5 mb-10">
             <ul className="flex flex-wrap -mb-px gap-10 justify-center">
                 {tabs.map((tab) => (
                     <button

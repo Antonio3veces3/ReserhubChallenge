@@ -13,7 +13,7 @@ function AppLayout() {
   const isAuthPage = location.pathname.startsWith('/auth')
 
   return (
-    <div className={isAuthPage ? '' : 'pt-16'}>
+    <div className={`${isAuthPage ? '' : 'pt-16'} bg-gray-100`}>
       {!isAuthPage && <Navbar />}
       <Routes>
         {/* Auth Routes */}
