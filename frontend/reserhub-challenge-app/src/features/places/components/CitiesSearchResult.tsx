@@ -6,9 +6,10 @@ import { useState } from 'react';
 
 interface CitiesSearchResultProps {
     isLoading: boolean;
-    citiesWithWeather: CityWeatherDetails[]
+    citiesWithWeather: CityWeatherDetails[];
+    enableHideButton?: boolean;
 }
-export const CitiesSearchResult = ({ isLoading, citiesWithWeather }: CitiesSearchResultProps) => {
+export const CitiesSearchResult = ({ isLoading, citiesWithWeather, enableHideButton = true }: CitiesSearchResultProps) => {
     const [hidden, setHidden] = useState(false)
     const hiddenProp = hidden ? 'hidden' : ''
 
@@ -28,7 +29,7 @@ export const CitiesSearchResult = ({ isLoading, citiesWithWeather }: CitiesSearc
 
     return (
         <div className="w-full max-w-full mx-auto p-4 rounded-xl shadow-2xl">
-            {citiesWithWeather.length > 0 && <div className='pl-36 mb-4'>
+            {citiesWithWeather.length > 0 && enableHideButton && <div className='pl-36 mb-4'>
                 <button
                     onClick={() => setHidden(!hidden)}
                     type='button'>
