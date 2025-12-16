@@ -5,6 +5,8 @@ import { CurrentWeatherDetails } from '../features/city/CurrentWeatherDetails'
 import { ForecastDetails } from '../features/city/ForecastDetails'
 import { FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import { FaMapLocationDot } from 'react-icons/fa6'
+import { ForecastNew } from '../features/city/ForecastNew'
+import { CurrentWeatherNew } from '../features/city/CurrentWeatherNew'
 
 export function City() {
     const [searchParams] = useSearchParams()
@@ -20,16 +22,25 @@ export function City() {
 
     const { data: dataForecast, isLoading: forecastIsLoading, isError: forecastIsError } = useGetForecastWeather({ lat: latNumber, lon: lonNumber });
 
-
     return (
-        <div className="p-6">
-            <div className="max-w-8xl mx-auto">
-                <div className="text-4xl font-bold text-red-800 flex flex-col items-center justify-center mb-2">
-                    <FaMapMarkerAlt />
-                </div>
-                <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">{cityName}, {country}</h1>
+        <div className="p-6 relative min-h-screen">
+            <div className="absolute inset-0 bg-[url(/src/image/cloudySky.jpg)] bg-cover bg-center opacity-100" />
+            <div className="max-w-8xl mx-auto relative z-10">
+                <h1 className="text-6xl font-bold text-white mt-10 text-center tracking-wider">{cityName}, {country}</h1>
 
-                <div className="flex flex-col xl:flex-row gap-8 min-h-96 items-stretch">
+                <div className='flex flex-col gap-8 min-h-96 items-center'>
+                    <CurrentWeatherNew
+                        isError={currentWeatherIsError}
+                        isLoading={currentWeatherIsLoading}
+                        weather={dataCurrentWeather}
+                    />
+                    <ForecastNew
+                        isError={forecastIsError}
+                        isLoading={forecastIsLoading}
+                        forecastList={dataForecast?.list}
+                    />
+                </div>
+                {/* <div className="flex flex-col xl:flex-row gap-8 min-h-96 items-stretch">
                     <CurrentWeatherDetails
                         isError={currentWeatherIsError}
                         isLoading={currentWeatherIsLoading}
@@ -41,7 +52,7 @@ export function City() {
                         isLoading={forecastIsLoading}
                         forecastList={dataForecast?.list}
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     )
