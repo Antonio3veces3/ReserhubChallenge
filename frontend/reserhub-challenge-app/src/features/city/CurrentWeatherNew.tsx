@@ -25,7 +25,7 @@ export const CurrentWeatherNew = ({ weather, isError, isLoading }: CurrentWeathe
     const date = weather?.dt ? convertDatestampToHumanDate(weather?.dt) : undefined
     if (!isLoading && weather) {
         body = (
-            <div className="flex flex-row items-center gap-20 w-auto mt-5">
+            <div className="flex flex-row items-center gap-4 md:gap-25 w-auto mt-5">
                 <div className="flex-1 text-center">
                     <div className="text-8xl font-bold text-white text-center mt-5">{trunkTemperature(weather.main.temp)} °c</div>
                     <p className="text-lg font-semibold text-white mt-1 text-center">{weather.weather[0].description}</p>
