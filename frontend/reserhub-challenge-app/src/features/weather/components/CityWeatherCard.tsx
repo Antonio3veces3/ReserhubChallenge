@@ -18,6 +18,7 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
 
 
   const date = convertDatestampToHumanDate(weather!.dt)
+  const iconUrl = weather ? `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png` : undefined
   return (
     <button
       type="button"
@@ -31,7 +32,9 @@ export function CityWeatherCard({ data }: CityWeatherCardProps) {
       <div className="text-center mb-2 rounded-lg py-4">
         <p className=" text-white text-6xl font-bold mb-2">{trunkTemperature(weather!.main.temp)} °c</p>
         <p className=" text-gray-200 text-lg  flex items-center justify-center gap-2">
-          <FaCloud />
+          <div className="justify-items-center">
+            <img src={iconUrl} alt="Image" className="w-12 h-12" />
+          </div>
           {weather!.weather![0].description}
         </p>
       </div>

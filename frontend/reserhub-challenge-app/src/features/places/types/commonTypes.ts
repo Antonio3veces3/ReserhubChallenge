@@ -8,6 +8,7 @@ interface Coord {
 export interface WeatherDescription {
   main: string;
   description: string;
+  icon: string;
 }
 
 export interface MainWeather {

@@ -23,13 +23,19 @@ export const CurrentWeatherNew = ({ weather, isError, isLoading }: CurrentWeathe
     }
 
     const date = weather?.dt ? convertDatestampToHumanDate(weather?.dt) : undefined
+
+
     if (!isLoading && weather) {
+        const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
         body = (
-            <div className="flex flex-row items-center gap-4 md:gap-25 w-auto mt-5">
-                <div className="flex-1 text-center">
-                    <div className="text-8xl font-bold text-white text-center mt-5">{trunkTemperature(weather.main.temp)} °c</div>
-                    <p className="text-lg font-semibold text-white mt-1 text-center">{weather.weather[0].description}</p>
-                    <div className="flex justify-between w-full mb-4 mt-6 pl-3 pr-3">
+            <div className="flex flex-row items-center gap-0 sm:gap-4 md:gap-5 w-auto mt-5">
+                <div className="flex-1 text-center p-4">
+                    <div className="text-8xl font-bold text-white text-center">{trunkTemperature(weather.main.temp)} °c</div>
+                    <p className="text-xl font-semibold text-white mt-1 text-center">{weather.weather[0].description}</p>
+                    <div className="justify-items-center -mt-1">
+                        <img src={iconUrl} alt="Image" className="w-20 h-20" />
+                    </div>
+                    <div className="flex justify-between w-full mb-4 mt-2 sm:pl-3 sm:pr-3">
                         <TemperatureRange
                             name="Min"
                             value={trunkTemperature(weather.main.temp_min)}
@@ -42,7 +48,6 @@ export const CurrentWeatherNew = ({ weather, isError, isLoading }: CurrentWeathe
                         />
                     </div>
                 </div>
-
                 <div className="p-4">
                     <div className="grid grid-cols-2 gap-8 justify-items-center items-center">
                         <DetailRow Icon={FaTemperatureFull} label="Feels like" value={`${trunkTemperature(weather.main.feels_like)} °c`} />
@@ -99,7 +104,7 @@ const DetailRow = ({ Icon, label, value }: DetailRowProps) => (
             <Icon />
         </div>
         <div>
-            <div className="text-lg font-medium text-gray-300">{label}</div>
+            <div className="text-lg font-medium text-gray-200">{label}</div>
             <div className="text-2xl font-semibold text-gray-100">{value}</div>
         </div>
     </div>

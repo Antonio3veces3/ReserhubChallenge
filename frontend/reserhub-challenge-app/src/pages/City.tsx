@@ -29,7 +29,6 @@ export function City() {
             <div className="absolute inset-0 bg-[url(/src/image/cloudySky.jpg)] bg-cover bg-center opacity-100" />
             <div className="max-w-8xl mx-auto relative z-10">
                 <h1 className="text-6xl font-bold text-white mt-10 text-center tracking-wider">{cityName}, {country}</h1>
-
                 <div className='flex flex-col gap-8 min-h-96 items-center'>
                     <CurrentWeatherNew
                         isError={currentWeatherIsError}
@@ -42,19 +41,6 @@ export function City() {
                         forecastList={dataForecast?.list}
                     />
                 </div>
-                {/* <div className="flex flex-col xl:flex-row gap-8 min-h-96 items-stretch">
-                    <CurrentWeatherDetails
-                        isError={currentWeatherIsError}
-                        isLoading={currentWeatherIsLoading}
-                        weather={dataCurrentWeather}
-                    />
-
-                    <ForecastDetails
-                        isError={forecastIsError}
-                        isLoading={forecastIsLoading}
-                        forecastList={dataForecast?.list}
-                    />
-                </div> */}
             </div>
         </div>
     )

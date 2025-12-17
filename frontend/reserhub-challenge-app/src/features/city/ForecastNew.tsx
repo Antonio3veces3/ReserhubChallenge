@@ -32,8 +32,8 @@ export const ForecastNew = ({ isLoading, isError, forecastList }: ForecastWeathe
                         </div>
 
                         <div className="flex flex-col items-center gap-2 mt-4">
-                            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
-                                <FaCloud />
+                            <div className="justify-center rounded-full -mt-2 -mb-2">
+                                <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="Image" className="w-16 h-16" />
                             </div>
                             <div className="flex flex-col items-center content-end">
                                 <p className="text-lg font-semibold text-blue-900 2xl:text-2xl">
