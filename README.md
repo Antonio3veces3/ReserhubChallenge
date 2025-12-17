@@ -2,6 +2,10 @@
 
 > This is a full-stack challenge for weather and city exploration. It consists of a modern **Reactapplication** for a rich user experience and a secure, powerful **Node.js + TypeScript + Express REST API** that serves as the central data engine.
 
+## Architecture Overview
+
+![Diagram architecture](img/ReserhubArchitecture.png)
+
 ## 📦 Project Components
 
 ### 1. ⚡ Reserhub Challenge Backend
